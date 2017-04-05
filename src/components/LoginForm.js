@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../actions';
+import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class LoginForm extends Component {
@@ -13,30 +13,38 @@ class LoginForm extends Component {
     this.props.passwordChanged(text);
   }
 
+  //add a helper method
+
+  onButtonPress() {
+    const { email, password } = this.props;
+
+    this.props.loginUser({ email, password });
+  }
+
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            label="Email"
-            placeholder="email@gmail.com"
-            onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}
-          />
-        </CardSection>
+     <Card>
+       <CardSection>
+         <Input
+           label="Email"
+           placeholder="email@gmail.com"
+           onChangeText={this.onEmailChange.bind(this)}
+           value={this.props.email}
+         />
+       </CardSection>
+
+       <CardSection>
+         <Input
+           secureTextEntry
+           label="Password"
+           placeholder="password"
+           onChangeText={this.onPasswordChange.bind(this)}
+           value={this.props.password}
+         />
+       </CardSection>
 
         <CardSection>
-          <Input
-            secureTextEntry
-            label="password"
-            placeholder="password"
-            onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
-            />
-        </CardSection>
-
-        <CardSection>
-          <Button>
+          <Button onPress={this.onButtonPress.bind(this)}>
             Login
           </Button>
         </CardSection>
@@ -47,6 +55,7 @@ class LoginForm extends Component {
 
 // doing for password auth onChangeText thingy
 //everything for auth
+//onButtonPress is a helper method
 
 const mapStateToProps = state => {
   return {
@@ -55,4 +64,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged })(LoginForm);
+export default connect(mapStateToProps, {
+  emailChanged, passwordChanged, loginUser
+ })(LoginForm);
