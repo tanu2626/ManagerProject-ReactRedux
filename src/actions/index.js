@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
+
 import
   { EMAIL_CHANGED,
     PASSWORD_CHANGED,
@@ -60,4 +61,5 @@ const loginUserSuccess = (dispatch, user) => {
   });
 // IMPORT ACTIONS FROM ABOVE IMPORT 'react-native-router-flux';
   Actions.main();
+
 };
