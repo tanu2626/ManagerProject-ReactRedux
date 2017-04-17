@@ -55,6 +55,18 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
   };
 };
 
+export const employeeDelete = ({ uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return () => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+    .remove()
+    .then(() => {
+      Actions.employeeList({ type: 'reset' });
+    });
+  };
+};
+
 //save something to firebase, import firebase
 //find a key user,find a key ID, FIND A KEY OF EMPLOYEES
 //used string interpolation es6
