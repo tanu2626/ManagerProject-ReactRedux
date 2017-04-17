@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 import EmployeeForm from './EmployeeForm';
-import { employeeUpdate, employeeSave , employeeDelete } from '../actions';
+import { employeeUpdate, employeeSave, employeeDelete } from '../actions';
 import { Card, CardSection, Button, Confirm } from './common';
 
 class EmployeeEdit extends Component {
@@ -41,16 +41,17 @@ class EmployeeEdit extends Component {
     return (
       <Card>
         <EmployeeForm />
+
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this)}>
             Save Changes
-            </Button>
+          </Button>
         </CardSection>
 
         <CardSection>
           <Button onPress={this.onTextPress.bind(this)}>
             Text Schedule
-            </Button>
+          </Button>
         </CardSection>
 
         <CardSection>
@@ -64,15 +65,14 @@ class EmployeeEdit extends Component {
           onAccept={this.onAccept.bind(this)}
           onDecline={this.onDecline.bind(this)}
         >
-          Are you sure you want to delete this ?
+          Are you sure you want to delete this?
         </Confirm>
-
       </Card>
     );
   }
 }
 
-const mapStateToProps =  (state) => {
+const mapStateToProps = (state) => {
   const { name, phone, shift } = state.employeeForm;
 
   return { name, phone, shift };
@@ -80,4 +80,4 @@ const mapStateToProps =  (state) => {
 
 export default connect(mapStateToProps, {
   employeeUpdate, employeeSave, employeeDelete
- })(EmployeeEdit);
+})(EmployeeEdit);
